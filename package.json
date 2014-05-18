@@ -1,0 +1,28 @@
+{
+  "name": "hubot-team",
+  "description": "Create and manage the members of a team using hubot",
+  "version": "1.0.0",
+  "author": "Mihai Cîrlănaru <mihai@cirlanaru.com>",
+  "license": "MIT",
+
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "team"
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mihai/hubot-team.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/mihai/hubot-team/issues"
+  },
+
+  "dependencies": {
+    "coffee-script": "~1.6"
+  },
+
+  "main": "index.coffee"
+}

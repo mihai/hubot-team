@@ -1,0 +1,37 @@
+# Hubot Team
+
+Create and manage the members of a team using Hubot.
+
+
+## Installation
+
+Add **hubot-team** to your `package.json` file:
+
+```json
+"dependencies": {
+  ...
+  "hubot-team": "latest"
+}
+```
+
+Add **hubot-team** to your `external-scripts.json`:
+
+```json
+["hubot-team"]
+```
+
+Run `npm install hubot-team`
+
+## Commands
+
+    hubot team (+1|add) (me|<user>)      # add me or <user> to team
+    hubot team (-1|remove) (me|<user>)   # remove me or <user> from team
+    hubot team (list|show)               # list the people in the team
+    hubot team (new|empty|clear)         # clear team list
+    hubot team count                     # list the current size of the team
+
+
+## License
+&copy; 2014 [Mihai Cîrlănaru](http://www.mihai-cirlanaru.com)
+
+See [LICENSE](http://github.com/mihai/hubot-team/LICENSE) for more details.
