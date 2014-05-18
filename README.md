@@ -34,4 +34,4 @@ Run `npm install hubot-team`
 ## License
 &copy; 2014 [Mihai Cîrlănaru](http://www.mihai-cirlanaru.com)
 
-See [LICENSE](http://github.com/mihai/hubot-team/LICENSE) for more details.
+See [LICENSE](https://github.com/mihai/hubot-team/blob/master/LICENSE) for more details.
