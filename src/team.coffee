@@ -85,5 +85,8 @@ module.exports = (robot) ->
       msg.send message
 
   robot.respond /team (new|clear|empty)$/i, (msg) ->
-    robot.brain.data.team = {}
-    msg.send "Team list cleared"
+    if msg.message.user.id.toString() not in admins
+      msg.reply "Sorry, only admins can clear the team members list"
+    else
+      robot.brain.data.team = {}
+      msg.send "Team list cleared"
