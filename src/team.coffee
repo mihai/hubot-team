@@ -26,7 +26,7 @@ module.exports = (robot) ->
       count += part
     count
 
-  robot.respond /team (\+1|add) (.*)$/i, (msg) ->
+  robot.respond /team (\+1|add) (\w*) ?.*/i, (msg) ->
     user = msg.match[2]
     if user == "me"
       user = msg.message.user.name
@@ -42,7 +42,7 @@ module.exports = (robot) ->
       message += countMessage if countMessage
       msg.send message
 
-  robot.respond /team (-1|remove) (.*)$/i, (msg) ->
+  robot.respond /team (-1|remove) (\w*) ?.*/i, (msg) ->
     user = msg.match[2]
     if user == "me"
       user = msg.message.user.name
