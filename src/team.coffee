@@ -5,7 +5,7 @@
 #   None
 #
 # Configuration:
-#   None
+#   HUBOT_TEAM_ADMIN - A comma separate list of user IDs
 #
 # Commands:
 #   hubot team (+1|add) (me|<user>) - add me or <user> to team
@@ -17,8 +17,19 @@
 # Author:
 #   mihai
 
+config =
+  admin_list: process.env.HUBOT_TEAM_ADMIN
+
 module.exports = (robot) ->
   robot.brain.data.team ||= {}
+
+  unless config.admin_list?
+    robot.logger.warning 'The HUBOT_TEAM_ADMIN environment variable not set'
+
+  if config.admin_list?
+    admins = config.admin_list.split ','
+  else
+    admins = []
 
   teamSize = () ->
     count = 0
@@ -74,5 +85,8 @@ module.exports = (robot) ->
       msg.send message
 
   robot.respond /team (new|clear|empty)$/i, (msg) ->
-    robot.brain.data.team = {}
-    msg.send "Team list cleared"
+    if msg.message.user.id.toString() not in admins
+      msg.reply "Sorry, only admins can clear the team members list"
+    else
+      robot.brain.data.team = {}
+      msg.send "Team list cleared"
