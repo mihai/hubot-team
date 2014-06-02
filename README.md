@@ -39,6 +39,16 @@ as a comma separated list of usernames.
     hubot team count                     # list the current size of the team
 
 
+## Contributing
+
+If you are interested to make `hubot-team` better, fork this repository, check
+the list of [open issues](https://github.com/mihai/hubot-team/issues?state=open)
+for some suggestions to get started, and submit a pull request.
+
+Feel free to add yourself to the
+[CONTRIBUTORS](https://github.com/mihai/hubot-team/blob/master/CONTRIBUTORS)
+list.
+
 ## License
 &copy; 2014 [Mihai Cîrlănaru](http://www.mihai-cirlanaru.com)
 
