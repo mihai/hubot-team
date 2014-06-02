@@ -22,6 +22,14 @@ Add **hubot-team** to your `external-scripts.json`:
 
 Run `npm install hubot-team`
 
+
+## Configuration
+
+Some commands require an admin role to be run (i.e. `clear` team list). The
+admins can be specified throught the `HUBOT_TEAM_ADMIN` environment variable,
+as a comma separated list of usernames.
+
+
 ## Commands
 
     hubot team (+1|add) (me|<user>)      # add me or <user> to team
