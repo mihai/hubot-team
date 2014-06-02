@@ -5,7 +5,7 @@
 #   None
 #
 # Configuration:
-#   HUBOT_TEAM_ADMIN - A comma separate list of user IDs
+#   HUBOT_TEAM_ADMIN - A comma separate list of user names
 #
 # Commands:
 #   hubot team (+1|add) (me|<user>) - add me or <user> to team
@@ -85,7 +85,7 @@ module.exports = (robot) ->
       msg.send message
 
   robot.respond /team (new|clear|empty)$/i, (msg) ->
-    if msg.message.user.id.toString() not in admins
+    if msg.message.user.name not in admins
       msg.reply "Sorry, only admins can clear the team members list"
     else
       robot.brain.data.team = {}
