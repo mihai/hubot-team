@@ -39,7 +39,7 @@ module.exports = (robot) ->
 
   robot.respond /team (\+1|add) (\w*) ?.*/i, (msg) ->
     user = msg.match[2]
-    if user == "me"
+    if user.toLocaleLowerCase() == "me"
       user = msg.message.user.name
 
     if robot.brain.data.team[user]
@@ -59,7 +59,7 @@ module.exports = (robot) ->
 
   robot.respond /team (-1|remove) (\w*) ?.*/i, (msg) ->
     user = msg.match[2]
-    if user == "me"
+    if user.toLocaleLowerCase() == "me"
       user = msg.message.user.name
 
     if not robot.brain.data.team[user]
