@@ -32,11 +32,13 @@ as a comma separated list of usernames.
 
 ## Commands
 
-    hubot team (+1|add) (me|<user>)      # add me or <user> to team
-    hubot team (-1|remove) (me|<user>)   # remove me or <user> from team
-    hubot team (list|show)               # list the people in the team
-    hubot team (new|empty|clear)         # clear team list
-    hubot team count                     # list the current size of the team
+    hubot team +1                   # add me to the team
+    hubot team -1                   # remove me from the team
+    hubot team add (me|<user>)      # add me or <user> to team
+    hubot team remove (me|<user>)   # remove me or <user> from team
+    hubot team (list|show)          # list the people in the team
+    hubot team (new|empty|clear     # clear team list
+    hubot team count                # list the current size of the team
 
 
 ## Contributing
