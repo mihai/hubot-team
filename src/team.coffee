@@ -8,8 +8,10 @@
 #   HUBOT_TEAM_ADMIN - A comma separate list of user names
 #
 # Commands:
-#   hubot team (+1|add) (me|<user>) - add me or <user> to team
-#   hubot team (-1|remove) (me|<user>) - remove me or <user> from team
+#   hubot team +1 - add me to the team
+#   hubot team -1 - remove me from the team
+#   hubot team add (me|<user>) - add me or <user> to team
+#   hubot team remove (me|<user>) - remove me or <user> from team
 #   hubot team count - list the current size of the team
 #   hubot team (list|show) - list the people in the team
 #   hubot team (new|empty|clear) - clear team list
@@ -37,11 +39,7 @@ module.exports = (robot) ->
       count += part
     count
 
-  robot.respond /team (\+1|add) (\w*) ?.*/i, (msg) ->
-    user = msg.match[2]
-    if user.toLocaleLowerCase() == "me"
-      user = msg.message.user.name
-
+  addUserToTeam = (user, msg) ->
     if robot.brain.data.team[user]
       msg.send "#{user} already in the team"
     else
@@ -57,11 +55,7 @@ module.exports = (robot) ->
       message += countMessage if countMessage
       msg.send message
 
-  robot.respond /team (-1|remove) (\w*) ?.*/i, (msg) ->
-    user = msg.match[2]
-    if user.toLocaleLowerCase() == "me"
-      user = msg.message.user.name
-
+  removeUserFromTeam = (user, msg) ->
     if not robot.brain.data.team[user]
       msg.send "#{user} already out of the team"
     else
@@ -71,6 +65,24 @@ module.exports = (robot) ->
       message = "#{user} removed from the team"
       message += countMessage if countMessage
       msg.send message
+
+  robot.respond /team add (\w*) ?.*/i, (msg) ->
+    user = msg.match[1]
+    if user.toLocaleLowerCase() == "me"
+      user = msg.message.user.name
+    addUserToTeam(user, msg)
+
+  robot.respond /team \+1 ?.*/i, (msg) ->
+    addUserToTeam(msg.message.user.name, msg)
+
+  robot.respond /team remove (\w*) ?.*/i, (msg) ->
+    user = msg.match[1]
+    if user.toLocaleLowerCase() == "me"
+      user = msg.message.user.name
+    removeUserFromTeam(user, msg)
+
+  robot.respond /team -1/i, (msg) ->
+    removeUserFromTeam(msg.message.user.name, msg)
 
   robot.respond /team count$/i, (msg) ->
     msg.send "#{teamSize()} people are currently in the team"
