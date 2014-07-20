@@ -46,7 +46,11 @@ module.exports = (robot) ->
       msg.send "#{user} already in the team"
     else
       count = teamSize()
-      countMessage = ", " + count + " others are in" if count > 0
+      if count > 0
+        countMessage = ", " + count
+        countMessage += " others are in" if count > 1
+        countMessage += " other is in" if count == 1
+
       robot.brain.data.team[user] = 1
 
       message = "#{user} added to the team"
