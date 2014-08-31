@@ -66,7 +66,7 @@ module.exports = (robot) ->
       message += countMessage if countMessage
       msg.send message
 
-  robot.respond /team add (\w*) ?.*/i, (msg) ->
+  robot.respond /team add (\S*) ?.*/i, (msg) ->
     user = msg.match[1]
     if user.toLocaleLowerCase() == "me"
       user = msg.message.user.name
@@ -75,7 +75,7 @@ module.exports = (robot) ->
   robot.respond /team \+1 ?.*/i, (msg) ->
     addUserToTeam(msg.message.user.name, msg)
 
-  robot.respond /team remove (\w*) ?.*/i, (msg) ->
+  robot.respond /team remove (\S*) ?.*/i, (msg) ->
     user = msg.match[1]
     if user.toLocaleLowerCase() == "me"
       user = msg.message.user.name
