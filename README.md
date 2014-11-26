@@ -1,4 +1,4 @@
-# Hubot Team
+# Hubot Team [![npm version](https://badge.fury.io/js/hubot-team.svg)](http://badge.fury.io/js/hubot-team)
 
 Create and manage the members of a team using Hubot.
 
