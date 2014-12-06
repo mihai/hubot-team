@@ -85,7 +85,7 @@ module.exports = (robot) ->
       msg.send "#{user} already out of the team"
     else
       user_index = robot.brain.data.teams[team_name].indexOf(user)
-      robot.brain.data.teams[team_name].splice(user_index)
+      robot.brain.data.teams[team_name].splice(user_index, 1)
       count = teamSize(team_name, msg)
       countMessage = ", " + count + " remaining" if count > 0
       message = "#{user} removed from #{team_name}"
