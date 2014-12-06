@@ -86,10 +86,16 @@ module.exports = (robot) ->
       msg.send "`#{team_name}` does not exist"
       false
 
+  ##
+  ## hubot create <team_name> team - create team called <team_name>
+  ##
   robot.respond /create (\S*) team ?.*/i, (msg) ->
     team_name = msg.match[1]
     addTeam(team_name, msg)
 
+  ##
+  ## hubot (delete|remove) <team_name> team - delete team called <team_name>
+  ##
   robot.respond /(delete|remove) (\S*) team ?.*/i, (msg) ->
     team_name = msg.match[2]
     if msg.message.user.name in admins
@@ -98,6 +104,9 @@ module.exports = (robot) ->
     else
       msg.reply "Sorry, only admins can remove teams"
 
+  ##
+  ## hubot list teams - list all existing teams
+  ##
   robot.respond /list teams ?.*/i, (msg) ->
     team_count = Object.keys(robot.brain.data.teams).length
 
@@ -121,6 +130,9 @@ module.exports = (robot) ->
 
     msg.send message
 
+  ##
+  ## hubot <team_name> team add (me|<user>) - add me or <user> to team
+  ##
   robot.respond /(\S*) team add (\S*) ?.*/i, (msg) ->
     team_name = msg.match[1]
     user = msg.match[2]
@@ -128,10 +140,16 @@ module.exports = (robot) ->
       user = msg.message.user.name
     addUserToTeam(user, team_name, msg)
 
+  ##
+  ## hubot <team_name> team +1 - add me to the team
+  ##
   robot.respond /(\S*) team \+1 ?.*/i, (msg) ->
     team_name = msg.match[1]
     addUserToTeam(msg.message.user.name, team_name, msg)
 
+  ##
+  ## hubot <team_name> team remove (me|<user>) - remove me or <user> from team
+  ##
   robot.respond /(\S*) team remove (\S*) ?.*/i, (msg) ->
     team_name = msg.match[1]
     user = msg.match[2]
@@ -139,15 +157,24 @@ module.exports = (robot) ->
       user = msg.message.user.name
     removeUserFromTeam(user, team_name, msg)
 
+  ##
+  ## hubot <team_name> team -1 - remove me from the team
+  ##
   robot.respond /(\S*) team -1/i, (msg) ->
     team_name = msg.match[1]
     removeUserFromTeam(msg.message.user.name, team_name, msg)
 
+  ##
+  ## hubot <team_name> team count - list the current size of the team
+  ##
   robot.respond /(\S*) team count$/i, (msg) ->
     team_name = msg.match[1]
     return unless teamExists(team_name)
     msg.send "#{teamSize(team_name, msg)} people are currently in the team"
 
+  ##
+  ## hubot <team_name> team (list|show) - list the people in the team
+  ##
   robot.respond /(\S*) team (list|show)$/i, (msg) ->
     team_name = msg.match[1]
     return unless teamExists(team_name)
@@ -162,6 +189,9 @@ module.exports = (robot) ->
         message += "#{position}. #{user}\n"
       msg.send message
 
+  ##
+  ## hubot <team_name> team (empty|clear) - clear team list
+  ##
   robot.respond /(\S*) team (clear|empty)$/i, (msg) ->
     team_name = msg.match[1]
     if msg.message.user.name in admins
