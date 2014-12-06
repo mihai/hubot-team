@@ -8,7 +8,7 @@
 #   HUBOT_TEAM_ADMIN - A comma separate list of user names
 #
 # Commands:
-#   hubot create <team_name> team - add me to the team
+#   hubot create <team_name> team - create team called <team_name>
 #   hubot list teams - list all existing teams
 #   hubot <team_name> team +1 - add me to the team
 #   hubot <team_name> team -1 - remove me from the team
@@ -16,7 +16,7 @@
 #   hubot <team_name> team remove (me|<user>) - remove me or <user> from team
 #   hubot <team_name> team count - list the current size of the team
 #   hubot <team_name> team (list|show) - list the people in the team
-#   hubot <team_name> team (new|empty|clear) - clear team list
+#   hubot <team_name> team (empty|clear) - clear team list
 #
 # Author:
 #   mihai
@@ -59,10 +59,10 @@ module.exports = (robot) ->
 
   addTeam = (team_name, msg) ->
     if robot.brain.data.teams[team_name]
-      msg.send "#{team_name} already exists"
+      msg.send "#{team_name} team already exists"
     else
       robot.brain.data['teams'][team_name] = []
-      msg.send "#{team_name} team created!"
+      msg.send "#{team_name} team created, add some people to it"
 
   listTeams = (msg) ->
     team_count = Object.keys(robot.brain.data.teams).length
@@ -147,7 +147,7 @@ module.exports = (robot) ->
         message += "#{position}. #{user}\n"
       msg.send message
 
-  robot.respond /(\S*) team (new|clear|empty)$/i, (msg) ->
+  robot.respond /(\S*) team (clear|empty)$/i, (msg) ->
     team_name = msg.match[1]
     if msg.message.user.name in admins
       robot.brain.data.teams[team_name] = []
