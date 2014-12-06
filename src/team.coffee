@@ -64,20 +64,6 @@ module.exports = (robot) ->
       robot.brain.data['teams'][team_name] = []
       msg.send "#{team_name} team created, add some people to it"
 
-  listTeams = (msg) ->
-    team_count = Object.keys(robot.brain.data.teams).length
-
-    if team_count > 0
-      message = "Team (#{team_count} total):\n"
-      for team of robot.brain.data.teams
-        message += "#{team}\n"
-        for user in robot.brain.data.teams[team]
-          message += "- #{user}\n"
-      msg.send message
-
-    else
-      msg.send "Oh noes, we gots no teams!"
-
   removeUserFromTeam = (user, team_name, msg) ->
     return unless teamExists(team_name, msg)
 
@@ -104,7 +90,27 @@ module.exports = (robot) ->
     addTeam(team_name, msg)
 
   robot.respond /list teams ?.*/i, (msg) ->
-    listTeams(msg)
+    team_count = Object.keys(robot.brain.data.teams).length
+
+    if team_count > 0
+      message = "Teams:\n"
+      emptyTeams = "Empty teams:\n"
+
+      for team of robot.brain.data.teams
+        size = teamSize(team)
+        if size > 0
+          message += "#{team} (#{size} total)\n"
+          for user in robot.brain.data.teams[team]
+            message += "- #{user}\n"
+          message += "\n"
+        else
+          emptyTeams += "#{team}\n"
+
+      message += emptyTeams
+    else
+      message = "There isn't any team around, why not create one"
+
+    msg.send message
 
   robot.respond /(\S*) team add (\S*) ?.*/i, (msg) ->
     team_name = msg.match[1]
