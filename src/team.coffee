@@ -44,7 +44,7 @@ module.exports = (robot) ->
     return unless teamExists(team_name, msg)
 
     if user in robot.brain.data.teams[team_name]
-      msg.send "#{user} already in the #{team_name}"
+      msg.send "#{user} already in the `#{team_name}` team"
     else
       count = teamSize(team_name, msg)
       if count > 0
@@ -60,10 +60,10 @@ module.exports = (robot) ->
 
   addTeam = (team_name, msg) ->
     if robot.brain.data.teams[team_name]
-      msg.send "#{team_name} team already exists"
+      msg.send "`#{team_name}` team already exists"
     else
       robot.brain.data['teams'][team_name] = []
-      msg.send "#{team_name} team created, add some people to it"
+      msg.send "`#{team_name}` team created, add some people to it"
 
   removeUserFromTeam = (user, team_name, msg) ->
     return unless teamExists(team_name, msg)
@@ -83,7 +83,7 @@ module.exports = (robot) ->
     if robot.brain.data.teams[team_name]
       true
     else
-      msg.send "#{team_name} does not exist, buddy."
+      msg.send "`#{team_name}` does not exist"
       false
 
   robot.respond /create (\S*) team ?.*/i, (msg) ->
@@ -94,7 +94,7 @@ module.exports = (robot) ->
     team_name = msg.match[2]
     if msg.message.user.name in admins
       delete robot.brain.data.teams[team_name]
-      msg.send "Team #{team_name} removed"
+      msg.send "Team `#{team_name}` removed"
     else
       msg.reply "Sorry, only admins can remove teams"
 
@@ -108,7 +108,7 @@ module.exports = (robot) ->
       for team of robot.brain.data.teams
         size = teamSize(team)
         if size > 0
-          message += "#{team} (#{size} total)\n"
+          message += "`#{team}` (#{size} total)\n"
           for user in robot.brain.data.teams[team]
             message += "- #{user}\n"
           message += "\n"
