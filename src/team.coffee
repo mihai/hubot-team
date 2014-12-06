@@ -9,6 +9,7 @@
 #
 # Commands:
 #   hubot create <team_name> team - create team called <team_name>
+#   hubot (delete|remove) <team_name> team - delete team called <team_name>
 #   hubot list teams - list all existing teams
 #   hubot <team_name> team +1 - add me to the team
 #   hubot <team_name> team -1 - remove me from the team
@@ -88,6 +89,14 @@ module.exports = (robot) ->
   robot.respond /create (\S*) team ?.*/i, (msg) ->
     team_name = msg.match[1]
     addTeam(team_name, msg)
+
+  robot.respond /(delete|remove) (\S*) team ?.*/i, (msg) ->
+    team_name = msg.match[2]
+    if msg.message.user.name in admins
+      delete robot.brain.data.teams[team_name]
+      msg.send "Team #{team_name} removed"
+    else
+      msg.reply "Sorry, only admins can remove teams"
 
   robot.respond /list teams ?.*/i, (msg) ->
     team_count = Object.keys(robot.brain.data.teams).length
