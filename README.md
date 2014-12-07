@@ -32,13 +32,24 @@ as a comma separated list of usernames.
 
 ## Commands
 
-    hubot team +1                   # add me to the team
-    hubot team -1                   # remove me from the team
-    hubot team add (me|<user>)      # add me or <user> to team
-    hubot team remove (me|<user>)   # remove me or <user> from team
-    hubot team (list|show)          # list the people in the team
-    hubot team (new|empty|clear)    # clear team list
-    hubot team count                # list the current size of the team
+    hubot create <team_name> team               # create team called <team_name>
+    hubot (delete|remove) <team_name> team      # delete team called <team_name>
+    hubot list teams                            # list all existing teams
+    hubot (<team_name>) team +1                 # add me to the team
+    hubot (<team_name>) team -1                 # remove me from the team
+    hubot (<team_name>) team add (me|<user>)    # add me or <user> to team
+    hubot (<team_name>) team remove (me|<user>) # remove me or <user> from team
+    hubot (<team_name>) team (list|show)        # list the people in the team
+    hubot (<team_name>) team (empty|clear)      # clear team list
+    hubot (<team_name>) team count              # list the current size of the team
+
+All commands that have the `<team_name>` in parantheses can ommit it. For example:
+
+    hubot team +1
+
+would work just fine, adding the current user to the default team. Note: when
+adding and removing users without the `<team_name>` label, those users are
+included in a team that does not show up when running `hubot list teams`.
 
 
 ## Contributing
